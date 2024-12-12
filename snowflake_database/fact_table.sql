@@ -1,0 +1,32 @@
+// create the schema consumption schema 
+ use database customer_database;
+ use  schema consumption_zone ;
+ create or replace table consumption_zone.fact_table
+as
+SELECT
+    o.ORDERNUMBER,
+    o.LINEITEM,
+    o.ORDERDATE,
+    o.DELIVERYDATE,
+    c.FIRST_NAME,
+    c.LAST_NAME,
+    c.CITY,
+    c.STATE,
+    s.SQUAREMETERS,
+    s.OPENDATE,
+    p.PRODUCTNAME,
+    p.BRAND,
+    o.QUANTITY,
+    (o.QUANTITY * p.UNITPRICEUSD) AS REVENUE,
+    ((o.QUANTITY * p.UNITPRICEUSD) - (o.QUANTITY * p.UNITCOSTUSD)) AS PROFIT,
+    o.CURRENCYCODE
+FROM CUSTOMER_DATABASE.CURATE_ZONE.ORDERS_CURA o
+LEFT JOIN CUSTOMER_DATABASE.CURATE_ZONE.PRODUCTS_CURA p
+ON o.PRODUCTKEY = p.PRODUCTKEY
+LEFT JOIN CUSTOMER_DATABASE.CURATE_ZONE.CUSTOMER_CURA c
+ON o.CUSTOMERKEY = c.CUSTOMERKEY
+LEFT JOIN CUSTOMER_DATABASE.CURATE_ZONE.STORE_CURA s
+ON o.STOREKEY = s.STOREKEY
+ where c.FIRST_NAME is not null
+ and c.LAST_NAME is not null
+ ;
