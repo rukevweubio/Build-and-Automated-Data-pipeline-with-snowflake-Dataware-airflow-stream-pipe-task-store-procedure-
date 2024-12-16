@@ -361,6 +361,6 @@ from
 - **Data Transformation**: SQL queries apply business logic, data cleaning, aggregation, and enrichment to the raw data.
 - **Target Tables**: Transformed data is loaded into target tables for analysis and reporting, typically in a normalized format.
 - **SnowSQL / BI Tools**: SnowSQL enables command-line querying, while BI tools like Tableau or Power BI visualize the data and generate reports.
-![project  Architecture](https://github.com/rukevweubio/Build-Automated-Data-pipeline-with-snowflake-task-stream-and-store-procedure-/blob/main/Data%20architecture.jpeg)
+![project  Architecture](https://github.com/rukevweubio/Build-and-Automated-Data-pipeline-with-snowflake-Dataware-airflow-stream-pipe-task-store-procedure-/blob/main/Data%20architecture%20(2).jpeg)
 
 
