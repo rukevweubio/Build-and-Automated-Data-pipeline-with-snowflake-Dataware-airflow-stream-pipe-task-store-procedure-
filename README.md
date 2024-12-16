@@ -59,6 +59,29 @@ CREATE OR REPLACE PIPE mypipe_product
   FROM @my_csv_stage/Sales.csv
   FILE_FORMAT = (TYPE = 'CSV', FIELD_OPTIONALLY_ENCLOSED_BY = '"', SKIP_HEADER = 1);
 
+
+
+  // create atask to automate the process to load the data into the table 
+  CREATE OR REPLACE PROCEDURE load_product_data_task_proc()
+  RETURNS STRING
+  LANGUAGE SQL
+AS
+DECLARE
+  result STRING;
+BEGIN
+  -- Create the task to refresh the product pipe every minute
+  EXECUTE IMMEDIATE '
+    CREATE OR REPLACE TASK load_product_data_task
+    WAREHOUSE = Compute_wh
+    SCHEDULE = "1 MINUTE"  -- Every minute
+    AS
+      ALTER PIPE mypipe_product REFRESH;
+  ';
+
+  -- Return a success message
+  RETURN 'Product data pipe task is set up and scheduled successfully.';
+END;
+
 ```
 - Set Up Snowflake Streams for Change Data Capture (CDC):Create a stream to track changes in a source table
 
