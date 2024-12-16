@@ -43,9 +43,22 @@ snowsql -a <account_identifier> -u <username> -r <role> -w <warehouse> -d <datab
  FILE_FORMAT = (TYPE = 'CSV');
 ```
 ```
-CREATE PIPE my_pipe
- AUTO_INGEST = TRUE AS
- COPY INTO my_table FROM @my_stage;
+// create pipe to load data into tbale 
+CREATE OR REPLACE PIPE mypipe_product
+  
+  AS
+  COPY INTO PRODUCTS
+  FROM @my_csv_stage/Products.csv
+  FILE_FORMAT = (TYPE = 'CSV', FIELD_OPTIONALLY_ENCLOSED_BY = '"', SKIP_HEADER = 1);
+
+
+  // pipe to load data into orders
+  CREATE OR REPLACE PIPE mypipe_ORDER
+  AS
+  COPY INTO ORDERS
+  FROM @my_csv_stage/Sales.csv
+  FILE_FORMAT = (TYPE = 'CSV', FIELD_OPTIONALLY_ENCLOSED_BY = '"', SKIP_HEADER = 1);
+
 ```
 - Set Up Snowflake Streams for Change Data Capture (CDC):Create a stream to track changes in a source table
 
