@@ -363,4 +363,5 @@ from
 - **SnowSQL / BI Tools**: SnowSQL enables command-line querying, while BI tools like Tableau or Power BI visualize the data and generate reports.
 ![project  Architecture](https://github.com/rukevweubio/Build-and-Automated-Data-pipeline-with-snowflake-Dataware-airflow-stream-pipe-task-store-procedure-/blob/main/Data%20architecture%20(2).jpeg)
 
+![airflow](https://github.com/rukevweubio/Build-and-Automated-Data-pipeline-with-snowflake-Dataware-airflow-stream-pipe-task-store-procedure-/blob/main/snowflake_database/Screenshot%20(251).png)
 
